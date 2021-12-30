@@ -16,5 +16,15 @@ namespace IvyWarehouseManagement.Forms
         {
             InitializeComponent();
         }
+
+        private void Import_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void prodid_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
