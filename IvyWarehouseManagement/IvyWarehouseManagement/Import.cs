@@ -26,31 +26,38 @@ namespace IvyWarehouseManagement.Forms
             try
             {
                 conn.Open();
-
-
                 loadProduct();
-
-
+                initPage();
                 conn.Close();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Check Connect.cs");
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void initPage()
+        {
+            for (int i = 0; i < importTable.RowCount; i++)
+            {
+                importTable.Rows[i].Cells[5].Value = "0";
             }
         }
 
         private void loadProduct()
         {
-            string command = "Select productID [ID], productName [Name], productQuantity [Inventory], unit [Unit], supplier [Supplier]  From product";
+            string command = "Select productID [ID], productName [Name], productQuantity [Inventory], unit [Unit], supplier [Supplier] From product";
 
             SqlDataAdapter adapter = new SqlDataAdapter(command,conn);
             SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
 
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            DataColumn dc = new DataColumn("Add...");
+            dt.Columns.Add(dc);
 
-            importTable.DataSource = ds.Tables[0];
-            importTable.Columns.Add("Column", "Add");
+            importTable.DataSource = dt;
+            
 
 
             importTable.Columns[0].ReadOnly = true;
@@ -71,8 +78,10 @@ namespace IvyWarehouseManagement.Forms
             importTable.Columns[4].ReadOnly = true;
             importTable.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            importTable.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             importTable.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            importTable.ClearSelection();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -82,7 +91,40 @@ namespace IvyWarehouseManagement.Forms
 
         private void yesbtn_Click(object sender, EventArgs e)
         {
-            // Code run 
+            string command;
+            SqlCommand cmd;
+            SqlDataReader read;
+            // Code run
+            for (int i = 0; i < importTable.RowCount; i++)
+            {
+                
+                if (importTable.Rows[i].Cells[5].Value.ToString().Length > 0)
+                {
+                    MessageBox.Show(importTable.Rows[i].Cells[5].Value.ToString());
+                    /*
+                    int tmp = int.Parse(importTable.Rows[i].Cells[5].Value.ToString());
+                    if (tmp > 0)
+                    {
+                        command = "exec dbo.addinImport '" + "fgthjh" + "','" + importTable.Rows[i].Cells[0].Value.ToString() + "'," + tmp;
+                        cmd = new SqlCommand(command, conn);
+
+                        read = cmd.ExecuteReader();
+                        read.Close();
+                    }
+                    */
+                }
+                
+            }
+
+            /*
+            command = "exec dbo.importExecute '" + "fgthjh" + "'";
+            cmd = new SqlCommand(command, conn);
+            read = cmd.ExecuteReader();
+            read.Close();
+            */
+
+
+
             AreYouSure.Visible = false;
         }
 
@@ -94,6 +136,11 @@ namespace IvyWarehouseManagement.Forms
         private void update_Click(object sender, EventArgs e)
         {
             AreYouSure.Visible = true;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

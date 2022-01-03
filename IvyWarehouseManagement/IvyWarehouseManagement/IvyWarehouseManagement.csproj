@@ -146,5 +146,6 @@
   <ItemGroup>
     <None Include="Resources\24752648943-removebg-preview-removebg-preview.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
