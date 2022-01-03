@@ -124,7 +124,7 @@ namespace IvyWarehouseManagement.Forms
             this.update.IconColor = System.Drawing.Color.Black;
             this.update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.update.IconSize = 25;
-            this.update.Location = new System.Drawing.Point(724, 129);
+            this.update.Location = new System.Drawing.Point(744, 129);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(99, 47);
             this.update.TabIndex = 2;
@@ -148,7 +148,7 @@ namespace IvyWarehouseManagement.Forms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(723, 78);
+            this.label3.Location = new System.Drawing.Point(741, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 16);
             this.label3.TabIndex = 4;
@@ -156,7 +156,7 @@ namespace IvyWarehouseManagement.Forms
             // 
             // receivedNoteID
             // 
-            this.receivedNoteID.Location = new System.Drawing.Point(724, 103);
+            this.receivedNoteID.Location = new System.Drawing.Point(744, 103);
             this.receivedNoteID.Name = "receivedNoteID";
             this.receivedNoteID.Size = new System.Drawing.Size(100, 20);
             this.receivedNoteID.TabIndex = 5;

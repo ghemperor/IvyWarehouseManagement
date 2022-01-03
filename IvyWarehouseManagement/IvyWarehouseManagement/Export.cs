@@ -54,13 +54,11 @@ namespace IvyWarehouseManagement.Forms
             }
             ordererList.SelectedIndex = 0;
             reader.Close();
-
             for (int i = 0; i < exportTable.RowCount; i++)
             {
                 exportTable.Rows[i].Cells[5].Value = "0";
             }
         }
-
         private void loadProduct()
         {
             string commandd = "Select productID [ID], productName [Name], productQuantity [Inventory], unit [Unit], cast(exportPrice as bigint) [Price] From product";
@@ -79,7 +77,6 @@ namespace IvyWarehouseManagement.Forms
             exportTable.Columns[0].Width = 100;
             exportTable.Columns[3].Width = 100;
             exportTable.Columns[5].Width = 100;
-
 
             exportTable.Columns[0].ReadOnly = true;
             exportTable.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -107,10 +104,75 @@ namespace IvyWarehouseManagement.Forms
             exportTable.ClearSelection();
 
         }
+      
+
+    
         private void ordererList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        private void update_Click(object sender, EventArgs e)
+        {
+            AreYouSure.Visible = true;
+        }
+
+        private void yesbtn_Click(object sender, EventArgs e)
+        {
+            string command;
+            SqlCommand cmd;
+            SqlDataReader read;
+            // Code run
+            try
+            {
+                conn.Open();
+
+                for (int i = 0; i < exportTable.RowCount; i++)
+                {
+                    string test = exportTable.Rows[i].Cells[5].Value.ToString();
+                    if (int.TryParse(test, out int val))
+                    {
+                        if (test.Length > 0)
+                        {
+                            int tmp = int.Parse(exportTable.Rows[i].Cells[5].Value.ToString());
+                            if (tmp > 0)
+                            {
+
+                                command = "exec dbo.addinImport '" + receivedNoteID.Text + "','" + exportTable.Rows[i].Cells[0].Value.ToString() + "'," + (float)tmp;
+                                cmd = new SqlCommand(command, conn);
+
+                                read = cmd.ExecuteReader();
+                                read.Close();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter number only.");
+                        conn.Close();
+                        return;
+                    }
+                }
+
+                command = "exec dbo.exportExecute '" + receivedNoteID.Text + "'";
+                cmd = new SqlCommand(command, conn);
+                read = cmd.ExecuteReader();
+                read.Close();
+                exportTable.Columns.RemoveAt(5);
+                loadProduct();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            AreYouSure.Visible = false;
+        }
+
+        private void nobtn_Click(object sender, EventArgs e)
+        {
+            AreYouSure.Visible = false;
+        }
     }
 }

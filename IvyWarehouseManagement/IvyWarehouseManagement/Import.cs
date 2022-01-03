@@ -78,6 +78,7 @@ namespace IvyWarehouseManagement.Forms
             importTable.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             importTable.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
+            importTable.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             importTable.ClearSelection();
 
