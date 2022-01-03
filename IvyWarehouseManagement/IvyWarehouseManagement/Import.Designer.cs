@@ -37,6 +37,8 @@ namespace IvyWarehouseManagement.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.update = new FontAwesome.Sharp.IconButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.receivedNoteID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.importTable)).BeginInit();
             this.AreYouSure.SuspendLayout();
             this.SuspendLayout();
@@ -122,7 +124,7 @@ namespace IvyWarehouseManagement.Forms
             this.update.IconColor = System.Drawing.Color.Black;
             this.update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.update.IconSize = 25;
-            this.update.Location = new System.Drawing.Point(714, 78);
+            this.update.Location = new System.Drawing.Point(724, 129);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(99, 47);
             this.update.TabIndex = 2;
@@ -142,12 +144,31 @@ namespace IvyWarehouseManagement.Forms
             this.label2.Text = "Fill in \"Import\" box to update quantity in warehouse.";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(723, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 16);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Enter received note ID:";
+            // 
+            // receivedNoteID
+            // 
+            this.receivedNoteID.Location = new System.Drawing.Point(724, 103);
+            this.receivedNoteID.Name = "receivedNoteID";
+            this.receivedNoteID.Size = new System.Drawing.Size(100, 20);
+            this.receivedNoteID.TabIndex = 5;
+            // 
             // Import
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(219)))), ((int)(((byte)(252)))));
             this.ClientSize = new System.Drawing.Size(911, 464);
+            this.Controls.Add(this.receivedNoteID);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.update);
             this.Controls.Add(this.AreYouSure);
@@ -172,5 +193,7 @@ namespace IvyWarehouseManagement.Forms
         private System.Windows.Forms.Button yesbtn;
         private FontAwesome.Sharp.IconButton update;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox receivedNoteID;
     }
 }

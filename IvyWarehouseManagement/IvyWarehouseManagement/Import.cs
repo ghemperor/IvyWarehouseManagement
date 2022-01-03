@@ -14,6 +14,7 @@ namespace IvyWarehouseManagement.Forms
     public partial class Import : Form
     {
         SqlConnection conn;
+
         public Import()
         {
             InitializeComponent();
@@ -53,13 +54,11 @@ namespace IvyWarehouseManagement.Forms
 
             DataTable dt = new DataTable();
             adapter.Fill(dt);
-            DataColumn dc = new DataColumn("Add...");
+            DataColumn dc = new DataColumn("Import value");
             dt.Columns.Add(dc);
 
             importTable.DataSource = dt;
             
-
-
             importTable.Columns[0].ReadOnly = true;
             importTable.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             importTable.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -95,37 +94,59 @@ namespace IvyWarehouseManagement.Forms
             SqlCommand cmd;
             SqlDataReader read;
             // Code run
-            for (int i = 0; i < importTable.RowCount; i++)
+            try
             {
-                
-                if (importTable.Rows[i].Cells[5].Value.ToString().Length > 0)
+                conn.Open();
+            
+                for (int i = 0; i < importTable.RowCount; i++)
                 {
-                    MessageBox.Show(importTable.Rows[i].Cells[5].Value.ToString());
-                    /*
-                    int tmp = int.Parse(importTable.Rows[i].Cells[5].Value.ToString());
-                    if (tmp > 0)
+                    string test = importTable.Rows[i].Cells[5].Value.ToString();
+                    if(int.TryParse(test,out int val))
                     {
-                        command = "exec dbo.addinImport '" + "fgthjh" + "','" + importTable.Rows[i].Cells[0].Value.ToString() + "'," + tmp;
-                        cmd = new SqlCommand(command, conn);
+                        if (test.Length > 0)
+                        {
+                            int tmp = int.Parse(importTable.Rows[i].Cells[5].Value.ToString());
+                            if (tmp > 0)
+                            {
 
-                        read = cmd.ExecuteReader();
-                        read.Close();
+                                command = "exec dbo.addinImport '" + receivedNoteID.Text + "','" + importTable.Rows[i].Cells[0].Value.ToString() + "'," + (float)tmp;
+                                cmd = new SqlCommand(command, conn);
+
+                                read = cmd.ExecuteReader();
+                                read.Close();
+                            }
+                        }
                     }
-                    */
+                    else
+                    {
+                        MessageBox.Show("Please enter number only.");
+                        conn.Close();
+                        return;
+                    }   
                 }
                 
+                  
+           
+
+                command = "exec dbo.importExecute '" + receivedNoteID.Text + "'";
+                cmd = new SqlCommand(command, conn);
+                read = cmd.ExecuteReader();
+                read.Close();
+                importTable.Columns.RemoveAt(5);
+                loadProduct();
+                conn.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
 
-            /*
-            command = "exec dbo.importExecute '" + "fgthjh" + "'";
-            cmd = new SqlCommand(command, conn);
-            read = cmd.ExecuteReader();
-            read.Close();
-            */
-
-
-
             AreYouSure.Visible = false;
+        }
+
+        private char toChar(object value)
+        {
+            throw new NotImplementedException();
         }
 
         private void nobtn_Click(object sender, EventArgs e)
