@@ -148,6 +148,12 @@ begin
 End
 GO	
 
+create proc addinOrder(@productID varchar(10), @quantity float)
+as
+begin
+	Insert into ordering_items(listID, productID, quantity) values ('	', @productID, @quantity)
+End
+GO
 
 GO
 create proc importExecute(@billID varchar(10))
@@ -211,8 +217,8 @@ GO
 select orderID, p.productName [Pname], quantity , orderDate From ordering
 left join ordering_items oitems on ordering.orderID = oitems.listID 
 left join product p on p.productID = oitems.productID
-
-select * From import	
+GO
+ 
 exec dbo.addinImport 'I00','P04', 100
 select * From import
 GO
@@ -231,6 +237,7 @@ select * From product
 exec dbo.exportExecute 'I00'
 select * From product
 GO
+
 
 
 

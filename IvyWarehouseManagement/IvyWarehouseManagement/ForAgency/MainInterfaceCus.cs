@@ -15,6 +15,8 @@ namespace IvyWarehouseManagement
 {
     public partial class MainInterfaceCus : Form
     {
+
+        public static int a;
         private IconButton currentBtn;
         private Panel leftBorder;
         private Form currentChildForm;
@@ -28,6 +30,14 @@ namespace IvyWarehouseManagement
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+
+        public void Exit()
+        {
+            if(a == 1)
+            {
+                Login next = new Login();
+            }
         }
         // Button execute
         private void ActivateBtn(object sender, Color color)
@@ -96,6 +106,8 @@ namespace IvyWarehouseManagement
             panelDesktop.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+
+
             labelChild.Text = childForm.Text;
         }
 
@@ -108,7 +120,7 @@ namespace IvyWarehouseManagement
         private void import_Click(object sender, EventArgs e)
         {
             ActivateBtn(sender, colorBoard.clickColor);
-            OpenChildForm(new Import());
+            OpenChildForm(new ForAgency.AgencyAccount(this));
         }
         private void Reset()
         {

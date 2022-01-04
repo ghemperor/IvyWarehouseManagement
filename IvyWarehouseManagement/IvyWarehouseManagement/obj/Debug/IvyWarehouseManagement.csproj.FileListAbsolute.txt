@@ -32,3 +32,5 @@ C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManage
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.csproj.AssemblyReference.cache
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.MainInterfaceCus.resources
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.Order.resources
+C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.ForAgency.AgencyAccount.resources
+C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.ForAccountant.AccountantAccount.resources

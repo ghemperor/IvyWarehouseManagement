@@ -96,7 +96,7 @@ namespace IvyWarehouseManagement
             this.user.Name = "user";
             this.user.Size = new System.Drawing.Size(220, 60);
             this.user.TabIndex = 1;
-            this.user.Text = "Import";
+            this.user.Text = "User";
             this.user.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.user.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.user.UseVisualStyleBackColor = true;

@@ -65,6 +65,7 @@ namespace IvyWarehouseManagement.Forms
 
             importTable.Columns[1].ReadOnly = true;
             importTable.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+            importTable.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             importTable.Columns[2].ReadOnly = true;
             importTable.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

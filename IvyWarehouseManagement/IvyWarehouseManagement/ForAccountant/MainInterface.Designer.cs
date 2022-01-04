@@ -49,10 +49,11 @@ namespace IvyWarehouseManagement
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.panelShadow = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.account = new FontAwesome.Sharp.IconButton();
             this.Menu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.home)).BeginInit();
@@ -69,6 +70,7 @@ namespace IvyWarehouseManagement
             // Menu
             // 
             this.Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(203)))), ((int)(((byte)(249)))));
+            this.Menu.Controls.Add(this.account);
             this.Menu.Controls.Add(this.export);
             this.Menu.Controls.Add(this.import);
             this.Menu.Controls.Add(this.dashboard);
@@ -328,10 +330,15 @@ namespace IvyWarehouseManagement
             this.panelDesktop.Size = new System.Drawing.Size(927, 503);
             this.panelDesktop.TabIndex = 3;
             // 
-            // timer
+            // pictureBox1
             // 
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(151, 152);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(625, 348);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // label5
             // 
@@ -355,15 +362,34 @@ namespace IvyWarehouseManagement
             this.label3.TabIndex = 6;
             this.label3.Text = "WAREHOUSE MANAGEMENT SYSTEM";
             // 
-            // pictureBox1
+            // timer
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(151, 152);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(625, 348);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // account
+            // 
+            this.account.AutoEllipsis = true;
+            this.account.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.account.Dock = System.Windows.Forms.DockStyle.Top;
+            this.account.FlatAppearance.BorderSize = 0;
+            this.account.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.account.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.account.ForeColor = System.Drawing.Color.White;
+            this.account.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.account.IconColor = System.Drawing.Color.White;
+            this.account.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.account.IconSize = 38;
+            this.account.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.account.Location = new System.Drawing.Point(0, 320);
+            this.account.Name = "account";
+            this.account.Size = new System.Drawing.Size(220, 60);
+            this.account.TabIndex = 3;
+            this.account.Text = "Account";
+            this.account.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.account.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.account.UseVisualStyleBackColor = true;
+            this.account.Click += new System.EventHandler(this.account_Click);
             // 
             // MainInterface
             // 
@@ -420,5 +446,6 @@ namespace IvyWarehouseManagement
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private FontAwesome.Sharp.IconButton account;
     }
 }

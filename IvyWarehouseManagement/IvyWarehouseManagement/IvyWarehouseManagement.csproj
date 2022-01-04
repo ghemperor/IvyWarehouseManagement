@@ -54,23 +54,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connect.cs" />
-    <Compile Include="Dashboard.cs">
+    <Compile Include="ForAccountant\AccountantAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard.Designer.cs">
+    <Compile Include="ForAccountant\AccountantAccount.Designer.cs">
+      <DependentUpon>AccountantAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ForAccountant\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForAccountant\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Export.cs">
+    <Compile Include="ForAccountant\Export.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Export.Designer.cs">
+    <Compile Include="ForAccountant\Export.Designer.cs">
       <DependentUpon>Export.cs</DependentUpon>
     </Compile>
-    <Compile Include="Import.cs">
+    <Compile Include="ForAccountant\Import.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Import.Designer.cs">
+    <Compile Include="ForAccountant\Import.Designer.cs">
       <DependentUpon>Import.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ForAgency\AgencyAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForAgency\AgencyAccount.Designer.cs">
+      <DependentUpon>AgencyAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -78,45 +90,51 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainInterfaceCus.cs">
+    <Compile Include="ForAgency\MainInterfaceCus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainInterfaceCus.Designer.cs">
+    <Compile Include="ForAgency\MainInterfaceCus.Designer.cs">
       <DependentUpon>MainInterfaceCus.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainInterface.cs">
+    <Compile Include="ForAccountant\MainInterface.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainInterface.Designer.cs">
+    <Compile Include="ForAccountant\MainInterface.Designer.cs">
       <DependentUpon>MainInterface.cs</DependentUpon>
     </Compile>
-    <Compile Include="Order.cs">
+    <Compile Include="ForAgency\Order.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Order.Designer.cs">
+    <Compile Include="ForAgency\Order.Designer.cs">
       <DependentUpon>Order.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dashboard.resx">
+    <EmbeddedResource Include="ForAccountant\AccountantAccount.resx">
+      <DependentUpon>AccountantAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ForAccountant\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Export.resx">
+    <EmbeddedResource Include="ForAccountant\Export.resx">
       <DependentUpon>Export.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Import.resx">
+    <EmbeddedResource Include="ForAccountant\Import.resx">
       <DependentUpon>Import.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ForAgency\AgencyAccount.resx">
+      <DependentUpon>AgencyAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainInterfaceCus.resx">
+    <EmbeddedResource Include="ForAgency\MainInterfaceCus.resx">
       <DependentUpon>MainInterfaceCus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainInterface.resx">
+    <EmbeddedResource Include="ForAccountant\MainInterface.resx">
       <DependentUpon>MainInterface.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Order.resx">
+    <EmbeddedResource Include="ForAgency\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -164,6 +182,8 @@
   <ItemGroup>
     <None Include="Resources\24752648943-removebg-preview-removebg-preview.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Database\Ivy.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

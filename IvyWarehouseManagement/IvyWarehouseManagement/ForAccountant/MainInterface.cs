@@ -180,5 +180,11 @@ namespace IvyWarehouseManagement
             day.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
         }
+
+        private void account_Click(object sender, EventArgs e)
+        {
+            ActivateBtn(sender, colorBoard.clickColor);
+            OpenChildForm(new ForAccountant.AccountantAccount(this));
+        }
     }
 }
