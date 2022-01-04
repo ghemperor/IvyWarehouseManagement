@@ -29,18 +29,18 @@ namespace IvyWarehouseManagement.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exportTable = new System.Windows.Forms.DataGridView();
             this.ordererList = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.update = new FontAwesome.Sharp.IconButton();
             this.AreYouSure = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.nobtn = new System.Windows.Forms.Button();
-            this.yesbtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.yesbtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.receivedNoteID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.update = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.exportTable)).BeginInit();
             this.AreYouSure.SuspendLayout();
             this.SuspendLayout();
@@ -54,14 +54,14 @@ namespace IvyWarehouseManagement.Forms
             this.exportTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.exportTable.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(219)))), ((int)(((byte)(252)))));
             this.exportTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.exportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.exportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.exportTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.exportTable.Location = new System.Drawing.Point(87, 78);
             this.exportTable.Name = "exportTable";
@@ -92,22 +92,6 @@ namespace IvyWarehouseManagement.Forms
             this.label3.TabIndex = 5;
             this.label3.Text = "Choose the agency:";
             // 
-            // update
-            // 
-            this.update.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.update.IconChar = FontAwesome.Sharp.IconChar.Edit;
-            this.update.IconColor = System.Drawing.Color.Black;
-            this.update.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.update.IconSize = 25;
-            this.update.Location = new System.Drawing.Point(717, 187);
-            this.update.Name = "update";
-            this.update.Size = new System.Drawing.Size(99, 47);
-            this.update.TabIndex = 6;
-            this.update.Text = "Export";
-            this.update.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.update.UseVisualStyleBackColor = true;
-            this.update.Click += new System.EventHandler(this.update_Click);
-            // 
             // AreYouSure
             // 
             this.AreYouSure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(239)))), ((int)(((byte)(251)))));
@@ -121,16 +105,6 @@ namespace IvyWarehouseManagement.Forms
             this.AreYouSure.TabIndex = 7;
             this.AreYouSure.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(83, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(401, 19);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Fill in \"Export\" box to update quantity in warehouse.";
-            // 
             // nobtn
             // 
             this.nobtn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -141,6 +115,16 @@ namespace IvyWarehouseManagement.Forms
             this.nobtn.Text = "NO";
             this.nobtn.UseVisualStyleBackColor = true;
             this.nobtn.Click += new System.EventHandler(this.nobtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(317, 20);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Are you sure what you entered is correct?";
             // 
             // yesbtn
             // 
@@ -153,15 +137,15 @@ namespace IvyWarehouseManagement.Forms
             this.yesbtn.UseVisualStyleBackColor = true;
             this.yesbtn.Click += new System.EventHandler(this.yesbtn_Click);
             // 
-            // label1
+            // label2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(317, 20);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Are you sure what you entered is correct?";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(83, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(401, 19);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Fill in \"Export\" box to update quantity in warehouse.";
             // 
             // receivedNoteID
             // 
@@ -179,6 +163,22 @@ namespace IvyWarehouseManagement.Forms
             this.label4.Size = new System.Drawing.Size(138, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Enter delivery note ID:";
+            // 
+            // update
+            // 
+            this.update.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.update.IconChar = FontAwesome.Sharp.IconChar.Edit;
+            this.update.IconColor = System.Drawing.Color.Black;
+            this.update.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.update.IconSize = 25;
+            this.update.Location = new System.Drawing.Point(717, 187);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(99, 47);
+            this.update.TabIndex = 6;
+            this.update.Text = "Export";
+            this.update.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.update.UseVisualStyleBackColor = true;
+            this.update.Click += new System.EventHandler(this.update_Click);
             // 
             // Export
             // 

@@ -68,6 +68,13 @@ namespace IvyWarehouseManagement
                 next.ShowDialog();
                 this.Close();
             }
+            else if ((userbox.Text.Equals("kyquy") && pwbox.Text.Equals("kyquy")) || (userbox.Text.Equals("hoaphat") && pwbox.Text.Equals("hoaphat")))
+            {
+                MainInterfaceCus next = new MainInterfaceCus();
+                this.Hide();
+                next.ShowDialog();
+                this.Close();
+            }
             else
             {
                 notifyIcon1.ShowBalloonTip(100, "Oops!", "Wrong username or password.", ToolTipIcon.Info);

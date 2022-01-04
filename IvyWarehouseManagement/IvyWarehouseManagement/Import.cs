@@ -94,7 +94,6 @@ namespace IvyWarehouseManagement.Forms
             string command;
             SqlCommand cmd;
             SqlDataReader read;
-            // Code run
             try
             {
                 conn.Open();
@@ -102,7 +101,7 @@ namespace IvyWarehouseManagement.Forms
                 for (int i = 0; i < importTable.RowCount; i++)
                 {
                     string test = importTable.Rows[i].Cells[5].Value.ToString();
-                    if(int.TryParse(test,out int val))
+                    if(int.TryParse(test, out int val))
                     {
                         if (test.Length > 0)
                         {

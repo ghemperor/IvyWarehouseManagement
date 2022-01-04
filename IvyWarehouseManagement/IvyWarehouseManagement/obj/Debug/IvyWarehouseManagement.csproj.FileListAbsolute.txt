@@ -30,3 +30,5 @@ C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManage
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\bin\Debug\FontAwesome.Sharp.dll
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.csproj.CopyComplete
 C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.csproj.AssemblyReference.cache
+C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.MainInterfaceCus.resources
+C:\Users\ASUS\Desktop\ivymanager\Final\IvyWarehouseManagement\IvyWarehouseManagement\obj\Debug\IvyWarehouseManagement.Order.resources
