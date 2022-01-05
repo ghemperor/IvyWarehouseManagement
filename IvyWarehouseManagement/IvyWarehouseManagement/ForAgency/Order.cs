@@ -102,7 +102,7 @@ namespace IvyWarehouseManagement
             try
             {
                 conn.Open();
-                command = "Insert into ordering Values ('" + receivedNoteID.Text + "','A02',getdate(),'Pending')";
+                command = "Insert into ordering Values ('" + receivedNoteID.Text + "','A02', getdate(),'Pending')";
                 cmd = new SqlCommand(command, conn);
                 read = cmd.ExecuteReader();
                 read.Close();

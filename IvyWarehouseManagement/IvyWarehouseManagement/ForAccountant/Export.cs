@@ -14,7 +14,6 @@ namespace IvyWarehouseManagement.Forms
     public partial class Export : Form
     {
         SqlConnection conn;
-        SqlConnection connect;
         public Export()
         {
             InitializeComponent();
@@ -24,89 +23,84 @@ namespace IvyWarehouseManagement.Forms
         private void Export_Load(object sender, EventArgs e)
         {
             conn = Connect.ConnectSQL();
-            try
-            {
-                conn.Open();
-                loadProduct();
-                initPage();
-                conn.Close();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            
-            
+            initPage();
         }
 
         string[] orderID= { };
 
         private void initPage()
         {
-            string command = "Select accID [ID], Name From Account Where Role = 'Customer' ";
-
-            SqlCommand cmd = new SqlCommand(command, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                orderID.Append(reader.GetString(0));
-                ordererList.Items.Add(reader.GetSqlString(1));
+                conn.Open();
+                loadOrder();
+                AreYouSure.Visible = false;
+                conn.Close();
             }
-            ordererList.SelectedIndex = 0;
-            reader.Close();
-            for (int i = 0; i < exportTable.RowCount; i++)
+            catch (Exception ex)
             {
-                exportTable.Rows[i].Cells[5].Value = "0";
+                MessageBox.Show(ex.ToString());
             }
         }
-        private void loadProduct()
+        private void loadOrder()
         {
-            string commandd = "Select productID [ID], productName [Name], productQuantity [Inventory], unit [Unit], cast(exportPrice as bigint) [Price] From product";
+            string commandd = "Select o.orderID [Order ID], o.ordererID [Agency ID], o.orderDate [Order date] From ordering o where deliveryStatus = 'Pending'";
 
             SqlDataAdapter adapter = new SqlDataAdapter(commandd, conn);
             SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
 
             DataTable dt = new DataTable();
             adapter.Fill(dt);
+            /*
             DataColumn dc = new DataColumn("Export value");
             dt.Columns.Add(dc);
-         
+            */
+            if (dt.Rows.Count > 0)
+            {
+                orderTable.DataSource = dt;
+
+                orderTable.Columns[0].ReadOnly = true;
+                orderTable.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                orderTable.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                orderTable.Columns[1].ReadOnly = true;
+                orderTable.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+                orderTable.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                orderTable.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                orderTable.Columns[2].ReadOnly = true;
+                orderTable.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                orderTable.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                orderTable.ClearSelection();
+            }
+            else
+            {
+                dt = new DataTable();
+                orderTable.DataSource = dt;
+
+            }
+
+        }
+
+        private void loadOrderInfo() {
+            string orderid = orderTable.SelectedRows[0].Cells[0].Value.ToString();
+            string command = "Select oi.productID [Product ID], p.productName [Product name], exportPrice [Price], quantity [Quantity] From ordering o, product p, ordering_items oi where o.orderID = '"+ orderid + "' and o.orderID = oi.listID and oi.productID = p.productID";
+            SqlDataAdapter adapter = new SqlDataAdapter(command, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
 
             exportTable.DataSource = dt;
 
-            exportTable.Columns[0].Width = 100;
-            exportTable.Columns[3].Width = 100;
-            exportTable.Columns[5].Width = 100;
-
-            exportTable.Columns[0].ReadOnly = true;
-            exportTable.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            exportTable.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            exportTable.Columns[1].ReadOnly = true;
-            exportTable.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-            exportTable.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            exportTable.Columns[2].ReadOnly = true;
-            exportTable.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            exportTable.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            exportTable.Columns[3].ReadOnly = true;
-            exportTable.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            exportTable.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            exportTable.Columns[4].ReadOnly = true;
-            exportTable.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            exportTable.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            exportTable.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
-            exportTable.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            exportTable.ClearSelection();
-
         }
-      
+        private void orderTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowindex = orderTable.SelectedRows[0].Index;
+            orderTable.Rows[rowindex].Selected = true;
+        }
 
-    
         private void ordererList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -114,6 +108,7 @@ namespace IvyWarehouseManagement.Forms
 
         private void update_Click(object sender, EventArgs e)
         {
+            loadOrderInfo();
             AreYouSure.Visible = true;
         }
 
@@ -126,40 +121,12 @@ namespace IvyWarehouseManagement.Forms
             try
             {
                 conn.Open();
+                string orderid = orderTable.SelectedRows[0].Cells[0].Value.ToString();
 
-                for (int i = 0; i < exportTable.RowCount; i++)
-                {
-                    string test = exportTable.Rows[i].Cells[5].Value.ToString();
-                    if (int.TryParse(test, out int val))
-                    {
-                        if (test.Length > 0)
-                        {
-                            int tmp = int.Parse(exportTable.Rows[i].Cells[5].Value.ToString());
-                            if (tmp > 0)
-                            {
-
-                                command = "exec dbo.addinImport '" + receivedNoteID.Text + "','" + exportTable.Rows[i].Cells[0].Value.ToString() + "'," + (float)tmp;
-                                cmd = new SqlCommand(command, conn);
-
-                                read = cmd.ExecuteReader();
-                                read.Close();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please enter number only.");
-                        conn.Close();
-                        return;
-                    }
-                }
-
-                command = "exec dbo.exportExecute '" + receivedNoteID.Text + "'";
+                command = "exec dbo.exportExecute '" + orderid + "'";
                 cmd = new SqlCommand(command, conn);
                 read = cmd.ExecuteReader();
                 read.Close();
-                exportTable.Columns.RemoveAt(5);
-                loadProduct();
                 conn.Close();
             }
             catch (Exception ex)
@@ -167,12 +134,17 @@ namespace IvyWarehouseManagement.Forms
                 MessageBox.Show(ex.ToString());
             }
 
-            AreYouSure.Visible = false;
+            initPage();
         }
 
         private void nobtn_Click(object sender, EventArgs e)
         {
             AreYouSure.Visible = false;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
