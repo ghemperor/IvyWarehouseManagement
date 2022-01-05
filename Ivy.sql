@@ -117,8 +117,7 @@ insert into ordering_items values('O01', 'P010', 12);
 insert into ordering_items values('O01', 'P08', 5);
 
 --Insert export
-insert into export values('E00', 'O00', 'Paid' , 0, '1-1-2022');
-insert into export values('E01', 'O01', 'Paid', 0, '2-1-2022');
+--insert into export values('E00', 'O00', 'Paid' , 0, '1-1-2022');
 
 --Insert import 
 insert into import values('I00', 'P00', 100, '12-22-2021');
@@ -140,13 +139,6 @@ begin
 	Insert into import(billID, productID, quantity, importTime) values (@billID, @mahanghoa, @quantity, GETDATE());
 End
 GO
-
-create proc addinExport(@billID varchar(10), @orderID varchar(10), @paymentStatus varchar(15), @total money)
-as
-begin
-	Insert into export(billID, orderID, paymentStatus, total, exportTime) values (@billID, @orderID, @paymentStatus, @total, GETDATE());
-End
-GO	
 
 create proc addinOrder(@listID varchar(10), @productID varchar(10), @quantity float)
 as
@@ -185,32 +177,55 @@ begin
 End
 GO
 
-create proc exportExecute(@billID varchar(10))
+create proc exportExecute(@orderid varchar(10))
 as
 begin
 	declare @rowcount int
-	select @rowcount = Count(*) from import where billID = @billID
+	declare @total  money
+	Set @total = 0 
+	select @rowcount = Count(*) from ordering_items where listID = @orderid
+
+	Declare @exportid varchar(10)
+	set @exportid = ''
+	While @exportid = ''
+	Begin
+		Declare @tmpid varchar(10)
+		Set @tmpid = 'E'+ Upper( Left( Replace( Newid(),'-',''),9) )
+
+		If Not Exists(Select Top 1 1 From export Where billID = @tmpid)
+		Begin
+			Set @exportid = @tmpid
+		End
+	End
 
 	declare @i int
 	set @i = 1
 	while @i <= @rowcount
 	begin
 		declare @productID varchar(10)
-		select @productID = im1.productID
-		from import im1, 
-			(select productID, ROW_NUMBER() OVER(ORDER BY im2.productID Asc) AS [row] 
-				from import im2 
-				where im2.billID = @billID) countRow
-		where im1.billID = @billID and countRow.[row] = @i and im1.productID = countRow.productID
-		order BY im1.productID Asc
+		select @productID = oi.productID
+		from ordering_items oi, 
+			(select productID, ROW_NUMBER() OVER(ORDER BY oi2.productID Asc) AS [row] 
+				from ordering_items oi2 
+				where oi2.listID = @orderid) countRow
+		where oi.listID = @orderid and countRow.[row] = @i and oi.productID = countRow.productID
+		order BY oi.productID Asc
 
 		declare @quantity int
-		select @quantity = quantity from import Where billID = @billID and productID = @productID
+		select @quantity = quantity from ordering_items Where listID = @orderid and productID = @productID
 
+		Declare @price money
+		select @price = exportPrice from product Where productID = @productID
+
+		Set @total += @price * @quantity
 		Update product Set productQuantity = productQuantity - @quantity where productID = @productID
 
 		Set @i = @i+1
 	End
+
+	Insert into export Values (@exportid,@orderid,'Pending',@total,getdate())
+
+	Update ordering Set deliveryStatus = 'Done' Where orderID = @orderid
 End
 GO
 
@@ -228,28 +243,23 @@ select * From ordering_items
 --exec dbo.addinOrder 'P06', 20
 GO
 
-select * From export
-exec dbo.addinExport 'I02', 'O01', 'Paid', 500000
-select * From export
-GO
-
 select * From product
 exec dbo.importExecute 'I00'
 select * From product
 GO
-
-select * From product
-exec dbo.exportExecute 'I00'
-select * From product
-GO
-
 select * from import
 GO
+/*
+select * From product
+exec dbo.exportExecute 'O01'
+select * From product
+GO
+*/
 select * from export
 GO
 
 select ex.billID, p.productID, p.productName, oi.quantity, exportTime
-From ordering, ordering_items oi, product p,export ex
+From ordering, ordering_items oi, product p, export ex
 where ordering.orderID = oi.listID and oi.productID = p.productID and ex.orderID = ordering.orderID
 GO
 select * from product
@@ -259,6 +269,16 @@ select i.billID, p.productID, p.productName, i.quantity, i.importTime
 from product p, import i
 where p.productID = i.productID
 GO
-select * from import
 
+-- Export
+/*
+select o.orderID,o.ordererID, o.orderDate
+from ordering o
+where deliveryStatus ='Pending'
+GO
+select oi.productID, p.productName, p.exportPrice
+from ordering o, product p,ordering_items oi
+where o.ordererID = 'A02' and o.orderID = oi.listID and oi.productID = p.productID
+GO
+*/
 

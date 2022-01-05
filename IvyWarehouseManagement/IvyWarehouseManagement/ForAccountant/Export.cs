@@ -78,7 +78,6 @@ namespace IvyWarehouseManagement.Forms
             {
                 dt = new DataTable();
                 orderTable.DataSource = dt;
-
             }
 
         }
