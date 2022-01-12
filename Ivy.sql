@@ -282,3 +282,7 @@ where o.ordererID = 'A02' and o.orderID = oi.listID and oi.productID = p.product
 GO
 */
 
+select ex.billID,Sum(Cast((oi.quantity * p.exportPrice) as bigint) )
+From ordering o, ordering_items oi, product p, export ex
+where o.orderID = oi.listID and oi.productID = p.productID and ex.orderID = o.orderID
+Group by ex.billID
