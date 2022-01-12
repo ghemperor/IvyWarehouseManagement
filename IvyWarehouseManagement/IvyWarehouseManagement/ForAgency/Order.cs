@@ -118,7 +118,6 @@ namespace IvyWarehouseManagement
                             int tmp = int.Parse(orderTable.Rows[i].Cells[4].Value.ToString());
                             if (tmp > 0)
                             {
-
                                 command = "exec dbo.addinOrder '" + receivedNoteID.Text+ "','" + orderTable.Rows[i].Cells[0].Value.ToString() + "'," + (float)tmp;
                                 cmd = new SqlCommand(command, conn);
 
